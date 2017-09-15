@@ -1,0 +1,148 @@
+<div class="container-home">
+
+  <div class="home-background" style="background: #62E1A6; background-image: linear-gradient(-180deg, rgba(42,245,152,0.00) 0%, rgba(0,0,0,0.50) 100%), url('<%= image_url "background.png" %>');">
+    <%= render "shared/navbar"%>
+    <div class="general-wrapper">
+      <div class="home-content-wrapper">
+        <div class="home-content">
+          <%= image_tag "logo-no-baseline.png" %>
+          <h1>Trouvez une solution à votre chute de cheveux </h1>
+          <h2>Hair'Diag est le premier service de diagnostic capillaire en ligne </h2>
+          <%= link_to new_patient_path, class:"cta-start" do %>
+          <div>
+            <button class="btn btn-cta">
+              <p>Commencer le diagnostic</p>
+              <%= image_tag "icon-microscope.png", class: "icon-microscope" %>
+            </button>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="footer-lp">
+        <div class="content-footer-lp">
+          Comment ça marche ?
+        </div>
+      </div>
+
+      <div class="container process">
+        <div class="row">
+         <!--  <div class="process-icons "> -->
+         <div class="process-icon col-md-3">
+          <h3 class="two-lines">Répondez à un questionnaire</h3>
+            <%= image_tag "icon_diag.png", class: "icon-green" %>
+          </div>
+
+          <div class="process-icon-chevron hidden-xs col-md-1">
+            <%= image_tag "chevron-right.png" %>
+          </div>
+
+          <div class="process-icon col-md-3">
+            <h3 class="two-lines">Prenez 3 photos de votre cuir chevelu</h3>
+              <%= image_tag "icon_photo.png", class: "icon-green" %>
+          </div>
+
+          <div class="process-icon-chevron hidden-xs col-md-1">
+            <%= image_tag "chevron-right.png" %>
+          </div>
+
+          <div class="process-icon col-md-4">
+            <h3 class="three-lines">Recevez l'avis d’un dermatologue spécialiste du cuir chevelu en 48h</h3>
+              <%= image_tag "icon-answer.png", class: "icon-green" %>
+          </div>
+
+            </div>
+          </div>
+
+          <div class="reminder-cta" style="background: #62E1A6; background-image: url('<%= image_url "background.png" %>');">
+            <h2>Une solution simple, rapide et sécurisée pour seulement 20€. </h2>
+            <%= link_to root_path, class:"cta-start" do %>
+            <div>
+              <button class="btn btn-cta">
+                <p>Commencer le diagnostic</p>
+                <%= image_tag "icon-microscope.png", class: "icon-microscope" %>
+              </button>
+            </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="container benefits">
+          <h2>Les bénéfices Hair'Diag</h2>
+          <div class="row">
+           <!--  <div class="process-icons "> -->
+           <div class="process-icon col-md-4">
+            <h3>Des experts à portée de main</h3>
+            <p>Les médecins sont diplomés d'études spécialisées en dermatologie et inscrits au CNOM (Conseil National de l'Ordre des Médecins).
+            </p>
+            <%= image_tag "icon-time.png", class: "icon-green" %>
+          </div>
+
+          <div class="process-icon col-md-4">
+            <h3>Un gain de temps considérable</h3>
+            <p> Pas de prise de RDV, pas de déplacement, pas de salle d'attente. Avec Hair’diag, recevez un diagnostic en moins de 48h. Contre 29 jours en moyenne. </p>
+              <%= image_tag "icon-save-money.png", class: "icon-green" %>
+            </div>
+
+
+            <div class="process-icon col-md-4">
+              <h3>100% sécurisé et confidentiel</h3>
+              <p>Vos données sont stockées chez A2com, hébergeur de données de santé agréé par par le Ministère des affaires sociales et de la santé. </p>
+              <%= image_tag "icon-easy.png", class: "icon-green" %>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="home-banner" style="background-image: url('<%= image_url "image-banner.png" %>');" >
+          <h1>
+            Pensé pour vous simplifier la vie
+          </h1>
+
+        </div>
+
+        <div class="container team">
+          <div class="row">
+            <div class="team-member col-md-4">
+              <%= image_tag "photo-expert1.png" %>
+              <h2>Dr. Elisabeth Jourdan</h2>
+              <h3>Dermatologue</h3>
+            </div>
+            <div class="team-member col-md-4">
+              <%= image_tag "photo-expert2.png" %>
+              <h2>Dr. Sebastien Hartel</h2>
+              <h3>Dermatologue</h3>
+            </div>
+            <div class="team-member col-md-4">
+              <%= image_tag "photo-expert3.png" %>
+              <h2>Dr. Jean Christophe Maurin</h2>
+              <h3>Dermatologue</h3>
+            </div>
+
+          </div>
+
+        </div>
+        <%= render "shared/footer"%>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    $(window).scroll(function() {
+
+    if ($(this).scrollTop()>100)
+      {
+      $('.content-footer-lp').fadeIn(500, function() {
+        $('.content-footer-lp').addClass('p-bigger');
+      });
+     }
+    else
+     {
+      $('.content-footer-lp').removeClass('p-bigger');
+     }
+ });
+
+</script>
+
+
+

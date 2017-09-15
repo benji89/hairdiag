@@ -1,0 +1,7 @@
+<p>Bonjour <%= @patient.full_name %>,</p>
+
+<p>Vous venez de recevoir une réponse du Dr <%= @doctor.full_name %>. </p>
+
+<p>Pour y accéder, merci de cliquer sur le lien ci-dessous: </p>
+
+<%= link_to 'Réponse du docteur', patient_url(@patient) %>

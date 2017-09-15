@@ -1,0 +1,90 @@
+
+<div class="container" id="form-width">
+  <div class="background" >
+    <div class="row">
+      <div class="col-xs-6 page-part" style="background: #62E1A6; background-image: linear-gradient(-180deg, rgba(42,245,152,0.00) 0%, rgba(0,0,0,0.50) 100%), url('<%= image_url "background.png" %>'); ">
+        <div>
+          <%= link_to root_path, id: "logo" do %>
+          <%= image_tag "logo_white.png" %>
+          <% end %>
+        </div>
+        <div class="centerh">
+           <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+              <div class="message">
+                <div class="numbers">
+                  <h3>1</h3>
+                </div>
+                <div class="message-body">
+                  <p>Répondez aux questions de notre doc-bot Hair'Diag pour que vos réponses soient analysées par un demartologue.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+              <div class="message">
+                <div class="numbers">
+                  <h3>2</h3>
+                </div>
+                <div class="message-body">
+                  <p> Relisez vos réponses et confirmez. </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+              <div class="message actived">
+                <div class="numbers">
+                  <h3>3</h3>
+                </div>
+                <div class="message-body">
+                  <p> Payez et envoyez vos informations à un dermatologue Hair'Diag.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-6 page-part payment">
+        <div class="container-home centerh">
+          <div class="row validation-container">
+            <div class="col-md-10 col-md-offset-1">
+              <h2>Cher <%= @patient.first_name %>, nous avons bien enregitré vos informations.</h2>
+              <h3> Afin qu'un dermatologue certifié puisse rapidement établir un pré-diagnostic,
+              nous vous invitons maintenant à procéder au paiement.</h3>
+              <h3>
+              <%= form_tag patient_payments_path(@patient) do %>
+              <article>
+                <h2><label class="amount">
+                  <span>Prix : <%= humanized_money_with_symbol(@patient.price) %></span> </h2>
+                </label>
+              </article>
+
+              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-name="My consult"
+              data-email="<%= @patient.email %>"
+              data-description="Consultation <%= @patient.first_name %>"
+              data-amount="<%= @patient.price_cents %>"
+              data-currency="<%= @patient.price.currency %>"
+              data-label="Payer maintenant"
+              data-locale="auto">
+              </script>
+              <% end %>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="center_bottom_page wrapper-valitation-buttons">
+          <div class="btn btn-medium .payment">
+            <%= link_to "Retour à l'étape 2", validation_patient_path(@patient) , class: "header-item" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

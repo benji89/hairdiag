@@ -1,0 +1,344 @@
+
+<div class="dashboard-container">
+  <div class="row">
+    <%= render "shared/sidebar-dashboard"%>
+    <div class="col-md-10">
+      <div class="row dashboard-infos patients-show">
+
+          <h2>FICHE CLIENT</h2>
+          <div class="patients-details">
+            <div>
+              <h3>Informations pratiques <a data-toggle="collapse" data-target="#info-pratiques">
+              <i class="fa fa-minus collapse-icon"aria-hidden="true"></i></a>
+              </h3>
+              <div class="row collapse in" id="info-pratiques">
+                <div class="col-md-6 info-pratiques-input">
+                  <p>Patient</p>
+                  <span><%= "#{@patient.first_name.to_s} #{@patient.last_name.to_s}"%></span>
+                </div>
+                <div class="col-md-6 info-pratiques-input">
+                  <p>Email</p>
+                  <%= "#{@patient.email.to_s}"  %>
+                </div>
+                <div class="col-md-6 info-pratiques-input">
+                  <p>Genre</p>
+                  <%= "#{@patient.gender.to_s == "Un homme" ?
+                  "Homme".downcase : "Femme".downcase}" %>
+                </div>
+                <div class="col-md-6 info-pratiques-input">
+                  <p>Age</p>
+                  <%= "#{@patient.age} ans" %>
+                </div>
+                <div class="col-md-6 info-pratiques-input">
+                  <p>Localité</p>
+                  <%= "#{@patient.city.to_s}, #{@patient.zip_code.to_s} (#{@patient.country.to_s}) "  %>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3> Contexte médical <a data-toggle="collapse" data-target="#context-medical">
+              <i class="fa fa-minus collapse-icon"aria-hidden="true"></i></a>
+              </h3>
+              <div class="row collapse in" id="context-medical">
+                <div class="col-md-6 context-medical-input-tf">
+                    Couleur de cheveux <p> <%= @patient.hair_color.to_s %></p>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                  Type de cheveux <p><%= @patient.hair_type.to_s %></p>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                  Epaisseur des cheveux <p><%= @patient.hair_thickness.to_s %></p>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                    A l'impression que ses cheveux se sont affinés:
+
+                    <% if @patient.refined_hair.to_s =="Oui" %>
+                       <p>oui <i class="fa fa-check-square-o" aria-hidden="true"></i></p>
+                    <% else %>
+                      <p>non <i class="fa fa-times false-red" aria-hidden="true"></i></p>
+                    <% end %>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                  Membre de sa famille ayant le même problème
+                  <% if @patient.relative.to_s == "Père" || @patient.relative.to_s == "Grand-père" %>
+                   <p> <%= "son #{@patient.relative.to_s.downcase}" %></p>
+                  <% elsif @patient.relative.to_s == "Mère" || @patient.relative.to_s == "Grand-mère" %>
+                    <p> <%= "sa #{@patient.relative.to_s.downcase}" %></p>
+                  <% else %>
+                    <p>Aucun</p>
+                  <% end %>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                    Nombre de shampoing par semaine <p> <%= "#{pluralize(@patient.weekly_shampoo, "shampoing")}"%></p>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                    Pellicules
+                    <% if @patient.dandruff.to_s == "Oui" %>
+                       <p>oui <i class="fa fa-check-square-o" aria-hidden="true"></i></p>
+                    <% else %>
+                      <p>non <i class="fa fa-times false-red" aria-hidden="true"></i></p>
+                    <% end %>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                    Cheveux gras
+                    <% if @patient.greasy_hair.to_s == "Oui" %>
+                       <p>oui <i class="fa fa-check-square-o" aria-hidden="true"></i></p>
+                    <% else %>
+                      <p>non <i class="fa fa-times false-red" aria-hidden="true"></i></p>
+                    <% end %>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                  Fait des tresses / défrisages / brushings
+                  <% if @patient.brushing_hair.to_s == "Oui" %>
+                       <p>oui <i class="fa fa-check-square-o" aria-hidden="true"></i></p>
+                  <% else %>
+                      <p>non <i class="fa fa-times false-red" aria-hidden="true"></i></p>
+                  <% end %>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                  Se rase régulièrement tout ou une partie du cuir chevelu
+                  <% if @patient.shaving_hair.to_s == "Oui" %>
+                       <p>oui <i class="fa fa-check-square-o" aria-hidden="true"></i></p>
+                  <% else %>
+                      <p>non <i class="fa fa-times false-red" aria-hidden="true"></i></p>
+                  <% end %>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                  Estime la densité à l'arrière de son cuir chevelu à
+                  <p> <%= "#{@patient.scalp_density.to_s.downcase}" %></p>
+                </div>
+              </div>
+            </div>
+            <div>
+          <h3> Situation capillaire <a data-toggle="collapse" data-target="#situation-capillaire">
+              <i class="fa fa-minus collapse-icon"aria-hidden="true"></i></a>
+              </h3>
+              <div class="row collapse in" id="situation-capillaire">
+                <div class="col-md-6 context-medical-input-tf">
+                    Prend des vitamines
+                    <% if @patient.vitamines.to_s == "Oui" %>
+                       <p>oui <i class="fa fa-check-square-o" aria-hidden="true"></i></p>
+                    <% else %>
+                      <p>non <i class="fa fa-times false-red" aria-hidden="true"></i></p>
+                    <% end %>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                  Prend du finasteride
+                  <% if @patient.finasteride.to_s == "Oui" %>
+                    <p>oui <i class="fa fa-check-square-o" aria-hidden="true"></i></p>
+                  <% else %>
+                    <p>non <i class="fa fa-times false-red" aria-hidden="true"></i></p>
+                  <% end %>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                  Stade de la perte de cheveux <p><%= @patient.stage.to_s %></p>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                  Résultat du test de traction <p><%= @patient.traction_test.to_s %></p>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                  Zone de restauration souhaitée <p><%= @patient.restore_area.to_s %></p>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                  Technique de restauration préférée <p>F.U.E</p>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                  Prend du Minoxidil
+                  <% if @patient.minoxidil == "Oui"  %>
+                    <p>oui (<%="#{@patient.minoxidil_doses} doses"%>)</p>
+                  <% else %>
+                    <p>non <i class="fa fa-times false-red" aria-hidden="true"></i></p>
+                  <% end %>
+                </div>
+                <div class="col-md-6 context-medical-input-tf">
+                  A déjà effectué une greffe capillaire
+                  <% if @patient.hair_transplant.to_s == "Oui" %>
+                    <p>oui <i class="fa fa-check-square-o" aria-hidden="true"></i></p>
+                  <% else %>
+                    <p>non <i class="fa fa-times false-red" aria-hidden="true"></i></p>
+                  <% end %>
+                </div>
+                <% if @patient.hair_transplant == "oui" %>
+                  <div class="col-md-6 context-medical-input-tf">
+                    Technique de transplantation souhaitée <p><%= @patient.hair_transplant_technic.to_s %></p>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="patient-photos">
+              <h3> Photos <a data-toggle="collapse" data-target="#patient-pictures">
+                    <i class="fa fa-minus collapse-icon"aria-hidden="true"></i></a>
+              </h3>
+              <div class="row collapse in" id="patient-pictures">
+                <% if @patient.photos? %>
+                  <% @patient.photos.each do |photo| %>
+                  <div class="col-md-4 grow">
+                  <%= cl_image_tag photo.path, height: 200, width: 200, crop: :fill %>
+                  <div class="caption">
+                    <div class="blur"></div>
+                    <div class="caption-text">
+                      <h2>Vue 1</h2>
+                    </div>
+                  </div>
+                  </div>
+                  <% end %>
+                <% else %>
+                  <p>Le patient n'a pas chargé d'image</p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+        <h2> RECOMMANDATIONS </h2>
+        <div class="doctor-recommandations">
+
+          <div class="messages-templates">
+            <button id="message-button1" class="messages-templates-buttons switch-message-content" data-message-index="0" data-diagnostic-type="Prescription">Prescription 1</button>
+
+            <button id="message-button2" class="messages-templates-buttons switch-message-content" data-message-index="1" data-diagnostic-type="Prescription">Prescription 2</button>
+
+            <button id="message-button3" class="messages-templates-buttons switch-message-content" data-message-index="2" data-diagnostic-type="Prescription">Prescription 3</button>
+          </div>
+
+
+          <div class="dignastic-choices">
+            <button class="dignastic-choices-buttons switch-message-template"
+            data-diagnostic-type="Prescription"><i>1</i><p>Prescription</p></button>
+
+            <button class="dignastic-choices-buttons switch-message-template"
+            data-diagnostic-type="rdv" data-message-index="1"><i>2</i><p>Proposition de rendez-vous</p></button>
+
+            <button class="dignastic-choices-buttons switch-message-template"
+            data-diagnostic-type="Recommandations" data-message-index="2"><i>3</i><p>Recommandations</p></button>
+          </div>
+
+
+          <div class="recommandation-text-area">
+            <%= simple_form_for(@recommendation, url: doctor_create_answer_path(@patient)) do |f| %>
+            <%= f.error_notification %>
+              <div class="form-inputs">
+              <%= f.input :subject, required: false %>
+              <%= f.input :content, required: false, as: :text %>
+              </div>
+              <div class="form-actions">
+                <%= f.button :submit, "Envoyer le message", class:"btn-cta" %>
+              </div>
+            <% end %>
+          </div>
+
+        </div>
+
+
+      </div>
+
+      <div class="hexagon"></div>
+
+
+      <script>
+          $('.collapse-icon').click(function() {
+            $(this).toggleClass('fa-minus').toggleClass('fa-plus');
+          })
+
+          var messageTypes = {
+            "Prescription": [
+              {
+                button: "Prescription 1",
+                subject: "Traitement classique",
+                content: "Bonjour <%= @patient.first_name %>,\n \nVous nécessitez du traitement classique qui est:\n -3 comprimés de Faipatonchauve pendant 30 jours.\n\nCordialement, \n\n <%= current_doctor.first_name + " " +current_doctor.last_name%>",
+              },
+              {
+                button: "Prescription 2",
+                subject: "Mélange de produits en libre-service",
+                content: "Bonjour <%= @patient.first_name %>,\n \nIl existe un traitement particuliers pour ce type de perte de cheveux qui prends en compte plusieurs traitements complémentaires à prendre sur 15 jours:\n- Preparles, 3 fois par jour\n- Engraicheuv 2 fois par jour \n- Soipabart 1 comprimé par matin\n\nCordialement, \n\n <%= current_doctor.first_name + " " +current_doctor.last_name%>",
+              },
+              {
+                button: "Prescription 3",
+                subject: "Médicaments trouvables dans certaines pharamcies spécialisées",
+                content: "Bonjour <%= @patient.first_name %>,\n \nNe vous inquiétez pas pour votre chute de cheveux il existe un traitement très simple: \n- 5mg de Perpatescheuv 3 fois par jour.\nCependant ce médicament est disponible uniquement dans certaines pharmacies de votre ville comme celle-ci proche de chez vous : 'Pharmacie des Chartreux'\n\nCordialement, \n\n <%= current_doctor.first_name + " " +current_doctor.last_name%>",
+              }
+            ],
+
+            "rdv": [
+              {
+                button: "RDV 1",
+                subject: "RDV necessaire",
+                content: "Bonjour <%= @patient.first_name %>,\n\nIl est necessaire que vous preniez contact avec un spécialiste de votre entourage (ou moi-même) afin d'effectuer des examens approfondis.\n\nCordialement, \n\n <%= current_doctor.first_name + " " +current_doctor.last_name%> \n\nPS: pour prendre un rendez-vous avec moi, veuillez me contacter par mail: <%= current_doctor.email %>",
+              },
+              {
+                button: "RDV 2",
+                subject: "RDV avec un confrère",
+                content: "Bonjour <%= @patient.first_name %>,\n\nIl est necessaire que vous preniez contact avec un spécialiste que je connais afin d'effectuer des examens approfondis.\nVoici son Mail: potoreno@gmail.com\n\nCordialement, \n\n <%= current_doctor.first_name + " " +current_doctor.last_name%>",
+              },
+              {
+                button: "RDV 3",
+                subject: "RDV avec moi",
+                content: "Bonjour <%= @patient.first_name %>,\n\nIl est necessaire que vous preniez un rendez-vous avec moi afin d'effectuer des examens approfondis.\nVoici mon email: <%= current_doctor.email%>\n\nCordialement, \n\n <%= current_doctor.first_name + " " +current_doctor.last_name%>",
+              }
+            ],
+
+            "Recommandations": [
+              {
+                button: "Reco 1",
+                subject: "Recommendation comportementale",
+                content: "Bonjour <%= @patient.first_name %>,\n \nBonne nouvelle, nous avons une recommendation qui ne necessite pas de traitement capillaire pour vous:\n1. Agiter la tete de gauche à droite tous les matins 5 fois.\n2.Utiliser le shampoing Superarnak pour laver vos cheveux\n\nCordialement, \n\n<%= current_doctor.first_name + " " +current_doctor.last_name%>",
+              },
+              {
+                button: "Reco 2",
+                subject: "Plus de peur que de mal !",
+                content: "Bonjour <%= @patient.first_name %>,\n \nBonne nouvelle, vous ne necessitez aucun traitement capillaire, ni aucun consultation, tout est parfaitement normal au niveau capillaire!\n\nCordialement, \n\n<%= current_doctor.first_name + " " +current_doctor.last_name%>",
+              },
+              {
+                button: "Reco 3",
+                subject: "Rien à faire!",
+                content: "Bonjour <%= @patient.first_name %>,\n \nJ'espère que Barthez vous plait capillairement parlant car vous allez tendre vers lui.\n\nCourage, \n\n<%= current_doctor.first_name + " " +current_doctor.last_name%>",
+              }
+            ]
+          }
+
+          $('.switch-message-template').click(function() {
+
+            var button = $(this);
+            var diagnostic = button.data("diagnostic-type");
+
+            var button1 = messageTypes[diagnostic][0].button;
+            var button2 = messageTypes[diagnostic][1].button;
+            var button3 = messageTypes[diagnostic][2].button;
+            var subject = messageTypes[diagnostic][0].subject;
+            var content = messageTypes[diagnostic][0].content;
+
+            $('#message-button1').text(button1);
+            $('#message-button2').text(button2);
+            $('#message-button3').text(button3);
+            $("#message_subject").val(subject);
+            $("#message_content").val(content);
+
+            $('.messages-templates-buttons').data("diagnostic-type", diagnostic);
+            $('.switch-message-template').removeClass('active');
+            $(this).addClass('active');
+            $('#message-button1').addClass('active');
+          });
+
+          $('.switch-message-content').click(function() {
+            var button = $(this);
+            var diagnostic = button.data('diagnostic-type');
+            var message_index = button.data('message-index')
+
+            var subject = messageTypes[diagnostic][parseInt(message_index)].subject;
+            $("#message_subject").val(subject);
+
+            var content = messageTypes[diagnostic][parseInt(message_index)].content;
+            $("#message_content").val(content);
+
+            $('.switch-message-content').removeClass('active');
+            $(this).addClass('active');
+
+          });
+
+      </script>
+
+
+
+
+
+
+

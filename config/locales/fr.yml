@@ -1,0 +1,31 @@
+fr:
+  activerecord:
+    attributes:
+      message:
+        subject: Sujet
+        content: Contenu
+
+
+  patients:
+    zero: "Il n'y a actuellement aucun patient en attente d'être soigné,
+    vous serez alerté quand une demande de traitement vous sera parvenue."
+    one: "patient qui attend d'être traité"
+    other: "patients qui attendent d'être traités"
+
+  number:
+    currency:
+      format:
+        delimiter: " "
+        format: "%n %u"
+        precision: 2
+        separator: ","
+        significant: false
+        strip_insignificant_zeros: false
+        unit: "€"
+    format:
+      delimiter: " "
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+
